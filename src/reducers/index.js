@@ -1,5 +1,8 @@
 const emptyState = {
-  toDos: []
+  toDos: [{
+    item: "Walk the doge",
+    id: 1
+  }]
 };
 
 // updating our reducer:

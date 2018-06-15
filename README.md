@@ -195,3 +195,55 @@ export default App;
 ```
 * Note - I'm using classes from Materialize, but you can feel free to replace these with your own
 
+Next, we have to create a List component - let's make sure our code is organized and create a components folder.
+
+Current folder structure:
+```
+.
+├── node_modules
+├── public
+│   └── index.html
+├── src
+│   ├── actions
+│   │   └── index.js
+│   ├── components
+│   │   └── List.js        // *List now lives here
+│   ├── reducers
+│   │   └── index.js  
+│   ├── store
+│   │   └── index.js  
+│   ├── App.js     
+│   └── index.js    
+└── package.json
+```
+
+Within `List.js` :
+
+```
+import React from 'react';
+import { connect } from 'react-redux';
+
+// Here, we grab the state from the store and pass it to reduxList to map over.
+
+const mapStateToProps = state => {
+    return { toDos: state.toDos };  
+};
+
+const reduxList = ({toDos}) => toDos.map(todo => {
+    return (<div className="container" key={todo.id}>
+                <div className="col s12">
+                    <div className="card blue darken-2">
+                    <div className="card-content white-text">
+                        <span className="card-title">Item {todo.id}</span>
+                        <p>{todo.item}</p>
+                    </div>
+                    </div>
+                </div>
+            </div>)
+})
+
+const List = connect(mapStateToProps)(reduxList)
+
+export default List;
+```
+
