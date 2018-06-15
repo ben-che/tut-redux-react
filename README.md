@@ -151,3 +151,47 @@ Let's begin by installing the Redux package built for React:
 ```
 npm install react-redux --save
 ```
+This package grants us access to the react-redux `connect` method, the `mapStateToProps` function (think passing state down as a prop in vanilla React), which connects Redux store state to various React component props, regardless of how deeply nested the component is, and the `mapDispatchToProps` function (think event listeners / handlers), which connects Redux actions to React component props.
+
+First, we have to wrap the entire app in a `<Provider></Provider>` tag, enabling the store to be accessible as a prop.
+
+Within `/src/index.js` :
+```
+import React from "react";
+import { render } from "react-dom";
+import { Provider } from "react-redux";
+import store from "./store/index";
+import App from "./components/App";
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("app")
+);
+
+```
+
+Now, let's begin building a to do list within `App.js`:
+
+Within `/src/App.js` :
+
+```
+import React, { Component } from 'react';
+import List from "./components/List"
+
+class App extends Component {
+  render() {
+    return (
+      <div className="container">
+        <h2 style={{"textAlign":"center"}}>To Do List</h2>
+          <List />
+      </div>
+    );
+  }
+}
+
+export default App;
+
+```
+* Note - I'm using classes from Materialize, but you can feel free to replace these with your own
+
