@@ -274,5 +274,71 @@ Current folder structure:
 Within `Form.js` :
 
 ```
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { addToDo } from './../actions/index';
 
+// Here, we make disptach available to our props so that we can send an action to our reducer in the submit form handler
+
+const mapDispatchToProps = dispatch => {
+    return {
+        addToDo: toDo => dispatch(addToDo(toDo))
+      };
+}
+
+// We create a stateful controlled form - this doesn't have to be done through Redux because we don't need this state to be accessed by other components
+
+class reduxForm extends Component {
+
+  // state:
+    constructor() {
+        super();
+        this.state = {
+            input: ''
+        }
+    }
+
+    handleInput = (e) => {
+        console.log(e.target.value)
+        this.setState({
+            input: e.target.value
+        })
+    }
+
+    // here, we grab the new item from this component's state, and call the addToDo method we defined earlier and made accessible through mapDispatchToProps, and pass it a payload of the item name and a unique ID
+    handleSubmit = (e) => {
+        e.preventDefault();
+        let newToDo = this.state.input;
+        let id = Date.now()
+        this.props.addToDo({ item:newToDo, id })  // dispatching payload!
+        this.setState({
+            input : ''
+        })
+    }
+
+    render() {
+        return (
+            <div className="container">
+            <form className="col s12" onSubmit={(e)=>{this.handleSubmit(e)}}>
+              <div className="row">
+              <div className="col s1" />
+              <div className="input-field col s2">
+                    <button className="btn waves-effect waves-light" type="submit" name="action">Submit</button>
+                </div>
+                <div className="input-field col s9">
+                  <input id="item" type="text" value={this.state.input} onChange={(e)=>{this.handleInput(e)}}required />
+                  <label for="Add Item">Add Item</label>
+                </div>
+              </div>
+            </form>
+          </div>
+        )   
+    }
+}
+
+// here, we actually pass the dispatch to the redux form component
+const Form = connect(null, mapDispatchToProps)(reduxForm);
+
+export default Form;
 ```
+

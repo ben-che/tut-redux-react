@@ -7,8 +7,8 @@ class App extends Component {
     return (
       <div className="container">
         <h2 style={{"textAlign":"center"}}>To Do List</h2>
-          <List />
           <Form />
+          <List />
       </div>
     );
   }
