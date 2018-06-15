@@ -146,7 +146,7 @@ const rootReducer = (state = emptyState, action) => {
 export default rootReducer;
 ```
 
-## Adding React
+## Rendering Redux State on React
 Let's begin by installing the Redux package built for React:
 ```
 npm install react-redux --save
@@ -247,3 +247,32 @@ const List = connect(mapStateToProps)(reduxList)
 export default List;
 ```
 
+## Updating Redux State from React
+Let's create a small form to handle additions in our list. Create a new component called Form.js within `/src/components/` :
+
+Current folder structure:
+```
+.
+├── node_modules
+├── public
+│   └── index.html
+├── src
+│   ├── actions
+│   │   └── index.js
+│   ├── components
+│   │   ├── Form.js       // Ding ding ding
+│   │   └── List.js        
+│   ├── reducers
+│   │   └── index.js  
+│   ├── store
+│   │   └── index.js  
+│   ├── App.js     
+│   └── index.js    
+└── package.json
+```
+
+Within `Form.js` :
+
+```
+
+```
