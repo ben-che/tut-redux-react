@@ -1,1 +1,4 @@
-export const addArticle = article => ({ type: 'ADD_ARTICLE', payload: article });
+export const addToDo = toDo => ({
+    type: "ADD_TODO", 
+    payload: toDo 
+});

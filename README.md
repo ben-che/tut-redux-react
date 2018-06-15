@@ -86,7 +86,19 @@ Create a directory for our actions within `/src/actions/index.js`
 ```
 // lets create an action that will add a to do item to our list
 
-export const addToDo = toDo => ({ type: "ADD_TODO", payload: toDo });
+export const addToDo = toDo => ({ 
+  type: "ADD_TODO", 
+  payload: toDo
+});
+
+// and a sample toDo item may look like:
+{
+  type: "ADD_TODO",
+  payload: {
+    item: "Walk the doge",
+    id: 1
+  }
+}
 ```
 
 Breaking down the code above - the action type is a string that the reducer,  eventually composed of a switch statement with a number of cases, will use to identify which action to take. The payload is the updated state value that has to be brought into the store.
@@ -107,4 +119,35 @@ Current folder structure:
 │   ├── App.js     
 │   └── index.js    
 └── package.json
+```
+
+## Piecing together the parts
+As mentioned above, the reducer will be composed of a switch statement with a number of cases that match up with corresponding actions. The default case, however, in the case (haha) of a typo, would be to simply return the original state, with an optional console.log explaining that state has not changed.
+
+Going inside `/src/reducers/index.js` :
+```
+const emptyState = {
+  toDos: []
+};
+
+// updating our reducer:
+
+const rootReducer = (state = emptyState, action) => {
+  switch(action.type) {
+    case "ADD_TODO":
+      let newState = Object.assign( {...state, toDos: [...state.toDos, action.payload] } )
+      return newState;
+    default:
+      console.log("Default case hit, state has not changed");
+      return state;
+  }
+};
+
+export default rootReducer;
+```
+
+## Adding React
+Let's begin by installing the Redux package built for React:
+```
+npm install react-redux --save
 ```
