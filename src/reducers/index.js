@@ -14,8 +14,8 @@ const rootReducer = (state = emptyState, action) => {
       let newState = Object.assign({...state, toDos: [...state.toDos, action.payload] })
       return newState;
     case "DELETE_TODO":
-      console.log('delete case hit')
-      return state;
+      let deletedToDos = state.toDos.filter(todo => todo.key !== action.payload.key)
+      return {toDos: deletedToDos};
     default:
       console.log("Default case hit, state has not changed");
       return state;

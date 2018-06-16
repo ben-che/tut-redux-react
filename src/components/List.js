@@ -13,8 +13,12 @@ const mapDispatchToProps = dispatch => {
 }
 
 class reduxList extends React.Component {
-    render() {
+    deleteToDo = (key) => {
+        this.props.deleteToDo({key})
+    }
 
+    render() {
+        // console.log(this.props)
         let reduxListJSX = this.props.toDos.map(todo => {
             return (<div className="container" key={todo.key}>
                         <div className="col s12">
@@ -22,7 +26,7 @@ class reduxList extends React.Component {
                             <div className="card-content white-text">
                                 <span className="card-title">{todo.key? `Item ${todo.key}` : "To Do Items"}</span>
                                 <p>{todo.item}</p>
-                                {todo.key? <a className="waves-effect waves-light btn-small red">Delete</a> : ""}
+                                {todo.key? <a className="waves-effect waves-light btn-small red" onClick = { () => this.deleteToDo(todo.key) }>Delete</a> : ""}
                             </div>
                             </div>
                         </div>
