@@ -12,7 +12,8 @@ class reduxForm extends Component {
     constructor() {
         super();
         this.state = {
-            input: ''
+            input: '',
+            key: 2
         }
     }
 
@@ -27,9 +28,11 @@ class reduxForm extends Component {
         e.preventDefault();
         let newToDo = this.state.input;
         let id = Date.now()
-        this.props.addToDo({ item:newToDo, id })  // dispatching payload!
+        let newKey = this.state.key
+        this.props.addToDo({ item:newToDo, id, key: newKey })  // dispatching payload!
         this.setState({
-            input : ''
+            input : '',
+            key: this.state.key + 1
         })
     }
 
@@ -42,9 +45,9 @@ class reduxForm extends Component {
               <div className="input-field col s2">
                     <button className="btn waves-effect waves-light" type="submit" name="action">Submit</button>
                 </div>
-                <div className="input-field col s9">
+                <div className="input-field col s8">
                   <input id="item" type="text" value={this.state.input} onChange={(e)=>{this.handleInput(e)}}required />
-                  <label for="Add Item">Add Item</label>
+                  <label htmlFor="Add Item">Add Item</label>
                 </div>
               </div>
             </form>

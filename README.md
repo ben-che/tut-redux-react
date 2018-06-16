@@ -342,3 +342,4 @@ const Form = connect(null, mapDispatchToProps)(reduxForm);
 export default Form;
 ```
 
+Try and see if you can add a way to delete individual to do items! My solution will be in the sample code.

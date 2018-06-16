@@ -1,6 +1,7 @@
 const emptyState = {
   toDos: [{
-    item: "Walk the doge",
+    item: "Sample to do",
+    key: 1,
     id: 1
   }]
 };
@@ -12,6 +13,9 @@ const rootReducer = (state = emptyState, action) => {
     case "ADD_TODO":
       let newState = Object.assign({...state, toDos: [...state.toDos, action.payload] })
       return newState;
+    case "DELETE_TODO":
+      console.log('delete case hit')
+      return state;
     default:
       console.log("Default case hit, state has not changed");
       return state;
